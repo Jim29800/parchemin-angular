@@ -22,10 +22,9 @@ export class AuthService {
         "password" : password
       })
       .pipe(
-        tap(data => 
+        map(data => 
         localStorage.setItem('token', data["token"])
-          ),
-        catchError(_ => of(`Erreur lors de l'identification.`))
+          )
       )
       ;
   }
@@ -39,5 +38,14 @@ export class AuthService {
     }else{
       return true;
     }
+  }
+  private parseToken() {
+    var token = localStorage.getItem('token');
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+  }
+  getUsername(){
+    return this.parseToken()["username"];
   }
 }

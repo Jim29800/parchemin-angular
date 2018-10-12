@@ -9,30 +9,44 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
   message : string;
-  username : string;
-  password : string;
-  
+  username : string = '';
+  password : string = '';
+  error : string = '';
+
   constructor(public authService: AuthService, public router: Router) {
     this.setMessage();
   }
 
   setMessage() {
-    this.message = 'Vous ' + (this.authService.isLoggedIn() ? 'êtes connecté' : 'n\'êtes pas connecté');
+    this.message = (this.authService.isLoggedIn() ? 'Vous êtes connecté en tant que :' : 'Identification');
   }
 
   login() {
-    this.message = 'Vérification en cours...';
+    this.error = '';
+    if (this.username == '' || this.password == '') {
+      this.error = 'Veuillez renseigner tout les champs.'
+    }else{
 
-    this.authService.login(this.username, this.password).subscribe(
-      () => {
-        this.setMessage();
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/product-list';
-        // Redirect the user
-        this.router.navigate([redirect]);
-      }
-    );
+      this.message = 'Vérification en cours...';
+      
+      this.authService.login(this.username, this.password).subscribe(
+        () => {
+          this.setMessage();
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/product-list';
+          // Redirect the user
+          this.router.navigate([redirect]);
+        },
+        err => {
+          this.setMessage();
+          console.log(err)
+          if (err["status"] == 401) {
+            this.error = 'Erreur,identifiant ou mot de passe incorect.'
+          }
+        }
+      );
+    }
   }
 
   logout() {

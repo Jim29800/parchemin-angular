@@ -1,24 +1,46 @@
-<h2>LOGIN</h2>
-<p>{{message}}</p>
-<p>
-  <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
-  <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-</p>
-      <form (submit)="login()">
-        <div class="row center">
-          <div class="input-field col s6 offset-s3">
-            <input id="username" autofocus type="text" class="validate center" [(ngModel)]="username" name="username" required>
-            <label class="center" for="username">Pseudo</label>
-          </div>
+<section class="row d-flex justify-content-around">
+
+  <div *ngIf="authService.isLoggedIn()else elseBlock">
+      <div class="card">
+        <div class="card-header text-center">
+          <p class="card-text">{{message}}</p>
+          <h3 class="card-title text-capitalize">{{ authService.getUsername() }}</h3>
         </div>
-        <div class="row center">
-          <div class="input-field col s6 offset-s3">
-            <input id="password" type="password" class="validate center" [(ngModel)]="password" name="password"
-              required>
-            <label class="center" for="password">Password</label>
-          </div>
+        <div class="card-body text-center">
+          <p class="card-text">
+            <button (click)="logout()" class="btn btn-danger">Déconnexion</button>
+          </p>
         </div>
-        <div class="card-action center">
-          <input type="submit" value="Se connecter" class="waves-effect waves-light btn">
+      </div>
+  </div>
+
+  <ng-template #elseBlock>
+    <div class="col-md-4 col-lg-3 col-xs-12">
+      <div class="card">
+        <div class="card-header text-center">
+          <h3 class="card-title">{{ message }}</h3>
         </div>
-      </form>
+        <div class="card-body text-center">
+          <form (submit)="login()">
+            <div *ngIf="error != ''">
+              <span class="text-danger font-weight-bold">{{ error }}</span>
+            </div>
+            <div class="form-group">
+                <label for="username">Identifiant</label>
+                <input id="username" autofocus type="text" class="form-control" [(ngModel)]="username" name="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input id="password" type="password" class="form-control" [(ngModel)]="password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                S'identifier
+              </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+</section>
