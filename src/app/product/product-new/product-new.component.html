@@ -8,3 +8,9 @@
         {{ city["name"] }}
     </option>
 </select>
+<div class="form-group">
+    <div *ngFor="let tag of tags" class="form-check form-check-inline">
+        <input type="checkbox" id="tag{{ tag['id'] }}" name="tag{{ tag['id'] }}" class="form-check-input" value="{{ tag['id'] }}">
+        <label class="text-capitalize form-check-label" for="tag{{ tag['id'] }}">{{ tag["name"] }}</label>
+    </div>
+</div>

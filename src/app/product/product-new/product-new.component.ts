@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category/category.service';
 import { CityService } from '../../services/city/city.service';
+import { TagService } from '../../services/tag/tag.service';
 
 @Component({
   selector: 'app-product-new',
@@ -9,10 +10,11 @@ import { CityService } from '../../services/city/city.service';
 })
 export class ProductNewComponent implements OnInit {
 
-  categories: object = [{ id: 0, name: "Récupération des catégories en cours..." }];
-  cities : object =[{ id: 0, name: "Récupération des villes en cours..." }];
+  categories : object = [{ id: 0, name: "Récupération des catégories en cours..." }];
+  cities : object = [{ id: 0, name: "Récupération des villes en cours..." }];
+  tags : object =[{ id: 0, name: "Récupération des tags en cours..." }];
 
-  constructor(public CategoryService: CategoryService, public CityService: CityService) { }
+  constructor(public CategoryService: CategoryService, public CityService: CityService, public TagService: TagService) { }
 
   ngOnInit() {
     this.CategoryService.getCategories().subscribe(
@@ -23,6 +25,11 @@ export class ProductNewComponent implements OnInit {
     this.CityService.getCities().subscribe(
       data => {
         this.cities = data
+      }
+    )
+    this.TagService.getTags().subscribe(
+      data => {
+        this.tags = data
       }
     )
   }
