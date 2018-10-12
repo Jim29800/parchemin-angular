@@ -1,7 +1,34 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<nav>
-    <a routerLink="/homepage">Accueil</a>
-    <a routerLink="/product-new">Nouvelle annonce</a>
-    <a routerLink="/product-list">Liste de mes annonces</a>
+<nav class="navbar navbar-expand-lg navbar-light nav-bg-color">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <a class="navbar-brand" routerLink="/homepage">
+            <img src="assets/Logo-Le-Parchemin.png" style="width : auto; max-height : 30px" alt="Logo du parchemin">
+        </a>
+        <ul class="navbar-nav mr-auto text-capitalize">
+            <li class='nav-item'>
+                <a class="nav-link nav-color" routerLink="/homepage">Accueil</a>
+            </li>
+            <li class='nav-item'>
+                <a class="nav-link nav-color" routerLink="/product-new">Nouvelle annonce</a>
+            </li>
+            <li class='nav-item'>
+                <a class="nav-link nav-color" routerLink="/product-list">Liste de mes annonces</a>
+            </li>
+            <span *ngIf="authService.isLoggedIn()else elseBlock">
+                <li class='nav-item'>
+                    <a class="nav-link nav-color" routerLink="/login">Déconnexion</a>
+                </li>
+            </span>
+            <ng-template #elseBlock>
+                <li class='nav-item'>
+                    <a class="nav-link nav-color" routerLink="/login">Connexion</a>
+                </li>
+            </ng-template>
+        </ul>
+    </div>
 </nav>
 <router-outlet></router-outlet>
