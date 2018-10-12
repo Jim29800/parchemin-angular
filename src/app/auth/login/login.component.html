@@ -1,0 +1,24 @@
+<h2>LOGIN</h2>
+<p>{{message}}</p>
+<p>
+  <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
+  <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+</p>
+      <form (submit)="login()">
+        <div class="row center">
+          <div class="input-field col s6 offset-s3">
+            <input id="username" autofocus type="text" class="validate center" [(ngModel)]="username" name="username" required>
+            <label class="center" for="username">Pseudo</label>
+          </div>
+        </div>
+        <div class="row center">
+          <div class="input-field col s6 offset-s3">
+            <input id="password" type="password" class="validate center" [(ngModel)]="password" name="password"
+              required>
+            <label class="center" for="password">Password</label>
+          </div>
+        </div>
+        <div class="card-action center">
+          <input type="submit" value="Se connecter" class="waves-effect waves-light btn">
+        </div>
+      </form>

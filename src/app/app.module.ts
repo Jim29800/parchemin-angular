@@ -6,20 +6,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { Globals } from './globals'
 
 import { AppComponent } from './app.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { ProductNewComponent } from './product/product-new/product-new.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticationComponent,
     ProductNewComponent,
     ProductListComponent,
-    HomepageComponent
+    HomepageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
