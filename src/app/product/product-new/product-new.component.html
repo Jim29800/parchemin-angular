@@ -1,7 +1,10 @@
 <select name="category" id="category">
-
-    <option *ngFor="let category of categories">
+    <option *ngFor="let category of categories" id="{{ category['id'] }}" class="text-capitalize">
         {{ category["name"] }}
     </option>
-    
+</select>
+<select name="city" id="city">
+    <option *ngFor="let city of cities" id="{{ city['id'] }}" class="text-capitalize">
+        {{ city["name"] }}
+    </option>
 </select>
