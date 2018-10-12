@@ -7,17 +7,25 @@ import { Globals } from './globals'
 
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { ProductNewComponent } from './product/product-new/product-new.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    ProductNewComponent,
+    ProductListComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [Globals],
   bootstrap: [AppComponent]
