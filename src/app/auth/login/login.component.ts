@@ -31,10 +31,6 @@ export class LoginComponent {
         let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/product-list';
         // Redirect the user
         this.router.navigate([redirect]);
-      },
-      err => {
-        this.setMessage();
-        this.router.navigate(["/login"]);
       }
     );
   }
