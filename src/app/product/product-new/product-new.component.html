@@ -1,3 +1,7 @@
-<p>
-  product-new works!
-</p>
+<select name="category" id="category">
+
+    <option *ngFor="let category of categories">
+        {{ category["name"] }}
+    </option>
+    
+</select>

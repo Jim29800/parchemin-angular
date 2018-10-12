@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-product-new',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductNewComponent implements OnInit {
 
-  constructor() { }
+  categories : object =[{ id: 1, name: "Récupération des catégories en cours..." }];
+
+  constructor(public CategoryService: CategoryService) { }
 
   ngOnInit() {
+    this.CategoryService.getCategories().subscribe(
+      data => {
+        this.categories = data
+        console.log(this.categories)
+      }
+      )
   }
 
 }
