@@ -3,7 +3,7 @@ import { CategoryService } from '../../services/category/category.service';
 import { CityService } from '../../services/city/city.service';
 import { TagService } from '../../services/tag/tag.service';
 import { ProductService } from '../../services/product/product.service';
-
+// import * as fileUpload from 'fuctbase64';
 let fileUpload = require('fuctbase64');
 
 @Component({
@@ -28,6 +28,7 @@ export class ProductNewComponent implements OnInit {
   selectedFile: File;
   fileResult: any;
 
+  imageSrc;
   
   constructor(
     public CategoryService: CategoryService, 
@@ -47,7 +48,7 @@ export class ProductNewComponent implements OnInit {
     const uploadData = new FormData();
     uploadData.append('imageFile', this.selectedFile)
 
-    console.log(this.fileResult['__zone_symbol__value'])
+    // console.log(this.fileResult['__zone_symbol__value'])
     this.ProductService.post(this.title, this.description, this.ref, this.category, this.city, tags, this.fileResult['__zone_symbol__value'])
       .subscribe(event => {
         // console.log("event : " + event);
@@ -63,6 +64,14 @@ export class ProductNewComponent implements OnInit {
   onFileChange(event) {
     let result = fileUpload(event);
     this.fileResult = result;
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.readAsDataURL(file);
+    }
   }
 
   ngOnInit() {

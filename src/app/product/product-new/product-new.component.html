@@ -1,4 +1,10 @@
 <form (submit)="postProduct()" class="text-center">
+    <div class="text-left">
+        <br />
+        <button type="submit" class="btn btn-primary">
+            Mettre en ligne
+        </button>
+    </div>
     <div class="form-group">
         <label for="title">Titre</label>
         <input id="title" autofocus type="text" class="form-control" [(ngModel)]="title" name="title" required>
@@ -31,12 +37,11 @@
             <label class="text-capitalize form-check-label" for="tag{{ tag['id'] }}">{{ tag["name"] }}</label>
         </div>
     </div>
-    <div>
-        <input type="file" name="fileInput" (change)="onFileChange($event)"  />
+    <div class="custom-file">
+        <input class="custom-file-input" type="file" name="fileInput" (change)="onFileChange($event)"  />
+        <label class="custom-file-label" for="customFile">Choisir l'image</label>
+        <img id="blah" [src]="imageSrc || 'assets/aucun_apercu.png'" alt="Image du produit" />
         <br>
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">
-        Mettre en ligne
-    </button>
+
 </form>
