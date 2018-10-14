@@ -1,47 +1,55 @@
-<form (submit)="postProduct()" class="text-center">
-    <div class="text-left">
-        <br />
-        <button type="submit" class="btn btn-primary">
-            Mettre en ligne
-        </button>
-    </div>
-    <div class="form-group">
-        <label for="title">Titre</label>
-        <input id="title" autofocus type="text" class="form-control" [(ngModel)]="title" name="title" required>
-    </div>
-    <div class="form-group">
-        <label for="ref">Référence</label>
-        <input id="ref" autofocus type="text" class="form-control" [(ngModel)]="ref" name="ref" required>
-    </div>
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input id="description" autofocus type="text" class="form-control" [(ngModel)]="description" name="description" required>
-    </div>
-    <div class="form-group">
-        <select name="category" id="category" class="custom-select" [(ngModel)]="category">
-            <option *ngFor="let category of categories" id="{{ category['id'] }}" class="text-capitalize" [ngValue]="category.id">
-                {{ category["name"] }}
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <select name="city" id="city" class="custom-select" [(ngModel)]="city">
-            <option *ngFor="let city of cities" id="{{ city['id'] }}" class="text-capitalize" [ngValue]="city.id">
-                {{ city["name"] }}
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <div *ngFor="let tag of tags" class="form-check form-check-inline">
-            <input [(ngModel)]="tagSelected[tag['id']]" type="checkbox" id="tag{{ tag['id'] }}" name="tag{{ tag['id'] }}" class="form-check-input" value="{{ tag['id'] }}">
-            <label class="text-capitalize form-check-label" for="tag{{ tag['id'] }}">{{ tag["name"] }}</label>
+<div *ngIf="formSent; else elseBlock" class="text-center">
+    <h2>Requête envoyée, veuillez patienter</h2>
+</div>
+<ng-template #elseBlock>
+    <form (submit)="postProduct()" class="text-center">
+        <div *ngIf="error != ''">
+            <span class="text-danger font-weight-bold">{{ error }}</span>
         </div>
-    </div>
-    <div class="custom-file">
-        <input class="custom-file-input" type="file" name="fileInput" (change)="onFileChange($event)"  />
-        <label class="custom-file-label" for="customFile">Choisir l'image</label>
-        <img id="blah" [src]="imageSrc || 'assets/aucun_apercu.png'" alt="Image du produit" />
-        <br>
-    </div>
+        <div class="text-left">
+            <br />
+            <button type="submit" class="btn btn-primary">
+                Mettre en ligne
+            </button>
+        </div>
+        <div class="form-group">
+            <label for="title">Titre</label>
+            <input id="title" autofocus type="text" class="form-control" [(ngModel)]="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="ref">Référence</label>
+            <input id="ref" autofocus type="text" class="form-control" [(ngModel)]="ref" name="ref" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input id="description" autofocus type="text" class="form-control" [(ngModel)]="description" name="description" required>
+        </div>
+        <div class="form-group">
+            <select name="category" id="category" class="custom-select" [(ngModel)]="category">
+                <option *ngFor="let category of categories" id="{{ category['id'] }}" class="text-capitalize" [ngValue]="category.id">
+                    {{ category["name"] }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="city" id="city" class="custom-select" [(ngModel)]="city">
+                <option *ngFor="let city of cities" id="{{ city['id'] }}" class="text-capitalize" [ngValue]="city.id">
+                    {{ city["name"] }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <div *ngFor="let tag of tags" class="form-check form-check-inline">
+                <input [(ngModel)]="tagSelected[tag['id']]" type="checkbox" id="tag{{ tag['id'] }}" name="tag{{ tag['id'] }}" class="form-check-input" value="{{ tag['id'] }}">
+                <label class="text-capitalize form-check-label" for="tag{{ tag['id'] }}">{{ tag["name"] }}</label>
+            </div>
+        </div>
+        <div class="custom-file">
+            <input class="custom-file-input" type="file" name="fileInput" (change)="onFileChange($event)"  />
+            <label class="custom-file-label" for="customFile">Choisir l'image</label>
+            <img id="blah" [src]="imageSrc || 'assets/aucun_apercu.png'" alt="Image du produit" />
+            <br>
+        </div>
 
-</form>
+    </form>
+</ng-template>

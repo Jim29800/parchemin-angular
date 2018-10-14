@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category/category.service';
 import { CityService } from '../../services/city/city.service';
 import { TagService } from '../../services/tag/tag.service';
+import { Router } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
-// import * as fileUpload from 'fuctbase64';
+
 let fileUpload = require('fuctbase64');
 
 @Component({
@@ -13,31 +14,40 @@ let fileUpload = require('fuctbase64');
 })
 export class ProductNewComponent implements OnInit {
 
+  // Récupération des données de l'api
   categories : object = [{ id: 0, name: "Récupération des catégories en cours..." }];
   cities : object = [{ id: 0, name: "Récupération des villes en cours..." }];
   tags : object =[{ id: 0, name: "Récupération des tags en cours..." }];
 
+  // Données du formulaire
   category : string;
   city : string;
   tagSelected = [] ;
-
   title : string;
   ref : string;
   description : string;
-
   selectedFile: File;
   fileResult: any;
 
+  //Aperçu de l'image
   imageSrc;
   
+  // Information si le formulaire est envoyer
+  formSent = false;
+  // gestion des erreurs
+  error : string ='';
+
   constructor(
     public CategoryService: CategoryService, 
     public CityService: CityService, 
     public TagService: TagService,
-    public ProductService: ProductService
+    public ProductService: ProductService,
+    public router: Router
     ) { }
   
   postProduct(){
+    this.formSent  = true;
+
     let tags = [];
     for (let i = 0; i < this.tagSelected.length; i++) {
       if (this.tagSelected[i] == true) {
@@ -45,16 +55,24 @@ export class ProductNewComponent implements OnInit {
       }
       
     }
-    const uploadData = new FormData();
-    uploadData.append('imageFile', this.selectedFile)
+
+    //Si il y a une image, renvoi l'image sinon renvoie null
+    let image
+    if (this.fileResult != null) {
+      image = this.fileResult['__zone_symbol__value']["base64"]
+    }else{
+      image = null;
+    }
 
     // console.log(this.fileResult['__zone_symbol__value'])
-    this.ProductService.post(this.title, this.description, this.ref, this.category, this.city, tags, this.fileResult['__zone_symbol__value'])
+    this.ProductService.post(this.title, this.description, this.ref, this.category, this.city, tags, image)
       .subscribe(event => {
-        // console.log("event : " + event);
+        this.router.navigate(["/product-list"]);
       },
         error => {
-          // console.log(error);
+          this.formSent = false;
+          console.log(error);
+          this.error = 'Erreur, veuillez vérifier les données saisies.'
         }
       );
 

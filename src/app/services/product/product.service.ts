@@ -28,7 +28,7 @@ export class ProductService {
         "category": category,
         "city": city,
         "tags": tags,
-        "img" : image["base64"]
+        "img" : image
         
       },
       {
