@@ -8,28 +8,28 @@
       <th>Actions</th>
     </thead>
     <tbody *ngFor="let product of products">
-    <tr>
-      <td *ngIf="product.image; else noImageBlock">
-        <img style="max-height : 5em; max-width : 5em" src="{{ urlImage + product.image }}" alt="Aperçu du produit">
-      </td>
-      <ng-template #noImageBlock>
-        <td>
-          <img style="max-height : 5em; max-width : 5em" src="/assets/aucun_apercu.png" alt="Aucun aperçu">
+      <tr>
+        <td *ngIf="product.image; else noImageBlock">
+          <img style="max-height : 5em; max-width : 5em" src="{{ urlImage + product.image }}" alt="Aperçu du produit">
         </td>
-      </ng-template>
-      <td class="align-middle">
-        {{ product.ref }}
-      </td>
-      <td class="align-middle">
-        {{ product.title }}
-      </td>
-      <td class="align-middle">
-        {{ product.createdAt }}
-      </td>
-      <td class="align-middle">
-        <a routerLink="" class="btn btn-warning">Editer</a>
-      </td>
-    </tr>
+        <ng-template #noImageBlock>
+          <td>
+            <img style="max-height : 5em; max-width : 5em" src="/assets/aucun_apercu.png" alt="Aucun aperçu">
+          </td>
+        </ng-template>
+        <td class="align-middle">
+          {{ product.ref }}
+        </td>
+        <td class="align-middle">
+          {{ product.title }}
+        </td>
+        <td class="align-middle">
+          {{ product.createdAt }}
+        </td>
+        <td class="align-middle">
+          <a routerLink="" class="btn btn-danger">Supprimer</a>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
