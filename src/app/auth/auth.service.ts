@@ -32,19 +32,43 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
   }
-  isLoggedIn(){
+  isTokenExist(){
     if (localStorage.getItem('token') === null) {
       return false;
     }else{
       return true;
     }
   }
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  getTokenExpirationDate(token: string): Date {
+    const decoded = this.parseToken();
+
+    if (decoded.exp === undefined) return null;
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  isTokenExpired(token?: string): boolean {
+    if (!token) token = this.getToken();
+    if (!token) return true;
+
+    const date = this.getTokenExpirationDate(token);
+    if (date === undefined) return false;
+    return !(date.valueOf() > new Date().valueOf());
+  }
+
   private parseToken() {
     var token = localStorage.getItem('token');
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
   }
+  
   getUsername(){
     return this.parseToken()["username"];
   }

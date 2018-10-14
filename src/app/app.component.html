@@ -8,7 +8,7 @@
         <a class="navbar-brand" routerLink="/homepage">
             <img src="assets/Logo-Le-Parchemin.png" style="width : auto; max-height : 30px" alt="Logo du parchemin">
         </a>
-        <span *ngIf="authService.isLoggedIn()else elseBlock">
+        <span *ngIf="authService.isTokenExist()else elseBlock">
             <ul class="navbar-nav mr-auto text-capitalize">
                 <li class='nav-item'>
                     <a class="nav-link nav-color" routerLink="/product-new">Nouvelle annonce</a>

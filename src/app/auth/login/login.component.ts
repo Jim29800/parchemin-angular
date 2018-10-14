@@ -17,8 +17,10 @@ export class LoginComponent {
     this.setMessage();
   }
 
+
+
   setMessage() {
-    this.message = (this.authService.isLoggedIn() ? 'Vous êtes connecté en tant que :' : 'Identification');
+    this.message = (this.authService.isTokenExist() ? 'Vous êtes connecté en tant que :' : 'Identification');
   }
 
   login() {

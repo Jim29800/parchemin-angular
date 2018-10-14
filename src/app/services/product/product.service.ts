@@ -34,11 +34,14 @@ export class ProductService {
       {
         headers: this.header
       })
-      // .pipe(
-      //   map(data =>
-      //     console.log(data)
-      //   )
-      // )
+      ;
+  }
+  getCreatedProducts() {
+    let url: string = this.globals.url + "products/created";
+    return this.http.get(url,
+      {
+        headers: this.header
+      })
       ;
   }
 }

@@ -1,6 +1,21 @@
 <section class="row d-flex justify-content-around">
 
-  <div *ngIf="authService.isLoggedIn()else elseBlock">
+  <div *ngIf="authService.isTokenExpired() && authService.isTokenExist(); else loginBlock">
+      <div class="card">
+        <div class="card-header text-center">
+          <h3 class="card-title text-capitalize">{{ authService.getUsername() }}</h3>
+          <p class="card-text">Votre session a expiré</p>
+        </div>
+        <div class="card-body text-center">
+          <p class="card-text">
+            <button (click)="logout()" class="btn btn-info">Me reconnecter</button>
+          </p>
+        </div>
+      </div>
+  </div>
+<ng-template #loginBlock>
+
+  <div *ngIf="authService.isTokenExist()else elseBlock">
       <div class="card">
         <div class="card-header text-center">
           <p class="card-text">{{message}}</p>
@@ -42,5 +57,6 @@
     </div>
   </ng-template>
 
+</ng-template>
 
 </section>

@@ -8,7 +8,7 @@
       <p class="card-text">
         Cette application est destiné à être utilisé dans les locaux du parchemin<br />
         afin de mettre en ligne des annonces directement à partir de ce mobile.<br />
-        <span *ngIf="authService.isLoggedIn()else elseBlock">
+        <span *ngIf="authService.isTokenExist()else elseBlock">
             Vous êtes connecté en tant que : <span class="text-capitalize">{{ authService.getUsername() }}</span>
         </span>
         <ng-template #elseBlock>
