@@ -19,18 +19,19 @@ export class ProductService {
 
   post(title, description, ref, category, city, tags, image) {
     let url: string = this.globals.url + "products";
-
+    let data = {
+      "title": title,
+      "description": description,
+      "ref": ref,
+      "category": category,
+      "city": city,
+      "tags": tags
+    }
+    if (image != null) {
+      data["img"] = image;
+    }
     return this.http.post(url,
-      {
-        "title": title,
-        "description": description,
-        "ref": ref,
-        "category": category,
-        "city": city,
-        "tags": tags,
-        "img" : image
-        
-      },
+      data,
       {
         headers: this.header
       })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ProductService } from '../../services/product/product.service';
+import { Globals } from '../../globals';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  products;
+  urlImage :string = this.Globals.urlImage;
+  constructor(public ProductService: ProductService,public Globals : Globals) { }
 
   ngOnInit() {
+    this.ProductService.getCreatedProducts().subscribe(
+      data => {
+        this.products = data;
+        console.log (data)
+      }
+    ); 
   }
 
 }

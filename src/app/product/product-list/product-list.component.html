@@ -1,3 +1,35 @@
-<p>
-  product-list works!
-</p>
+<div *ngIf="products">
+  <table class="table-list table">
+    <thead class="thead-dark">
+      <th>Image</th>
+      <th class="sort" data-sort="ref" style="cursor: pointer;">Référence ▼</th>
+      <th class="sort" data-sort="title" style="cursor: pointer;">Titre ▼</th>
+      <th class="sort" data-sort="createdAt" style="cursor: pointer;">Date de création ▼</th>
+      <th>Actions</th>
+    </thead>
+    <tbody *ngFor="let product of products">
+    <tr>
+      <td *ngIf="product.image; else noImageBlock">
+        <img style="max-height : 5em; max-width : 5em" src="{{ urlImage + product.image }}" alt="Aperçu du produit">
+      </td>
+      <ng-template #noImageBlock>
+        <td>
+          <img style="max-height : 5em; max-width : 5em" src="/assets/aucun_apercu.png" alt="Aucun aperçu">
+        </td>
+      </ng-template>
+      <td>
+        {{ product.ref }}
+      </td>
+      <td>
+        {{ product.title }}
+      </td>
+      <td>
+        {{ product.createdAt }}
+      </td>
+      <td>
+        <a routerLink="" class="btn btn-warning">Editer</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
