@@ -25,6 +25,7 @@
             <input id="description" autofocus type="text" class="form-control" [(ngModel)]="description" name="description" required>
         </div>
         <div class="form-group">
+            <label for="category">Catégorie</label>
             <select name="category" id="category" class="custom-select" [(ngModel)]="category">
                 <option *ngFor="let category of categories" id="{{ category['id'] }}" class="text-capitalize" [ngValue]="category.id">
                     {{ category["name"] }}
@@ -32,12 +33,14 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="city">Ville</label>
             <select name="city" id="city" class="custom-select" [(ngModel)]="city">
                 <option *ngFor="let city of cities" id="{{ city['id'] }}" class="text-capitalize" [ngValue]="city.id">
                     {{ city["name"] }}
                 </option>
             </select>
         </div>
+        <label for="city">Tags associés</label>
         <div class="form-group">
             <div *ngFor="let tag of tags" class="form-check form-check-inline">
                 <input [(ngModel)]="tagSelected[tag['id']]" type="checkbox" id="tag{{ tag['id'] }}" name="tag{{ tag['id'] }}" class="form-check-input" value="{{ tag['id'] }}">
