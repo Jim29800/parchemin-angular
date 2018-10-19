@@ -4,6 +4,7 @@ import { CityService } from '../../services/city/city.service';
 import { TagService } from '../../services/tag/tag.service';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
 let fileUpload = require('fuctbase64');
 
@@ -42,7 +43,8 @@ export class ProductNewComponent implements OnInit {
     public CityService: CityService, 
     public TagService: TagService,
     public ProductService: ProductService,
-    public router: Router
+    public router: Router,
+    private ng2ImgMax: Ng2ImgMaxService
     ) { }
   
   postProduct(){
@@ -80,8 +82,7 @@ export class ProductNewComponent implements OnInit {
 
 
   onFileChange(event) {
-    let result = fileUpload(event);
-    this.fileResult = result;
+    //preview de l'image
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
@@ -90,6 +91,28 @@ export class ProductNewComponent implements OnInit {
 
       reader.readAsDataURL(file);
     }
+    //resize & compress si besoin de l'image
+    let image = event.target.files[0];
+    this.ng2ImgMax.resizeImage(image, 1080, 720).subscribe(
+      result => {
+        // imageResized = new File([result], result.name);
+        this.ng2ImgMax.compressImage(result, 0.8).subscribe(
+          result2 => {
+            let file = new File([result2], result2.name);
+            let imageCompressed = { "target" : { "files" : [file] } };
+            //transform base 64
+            let result3 = fileUpload(imageCompressed);
+            this.fileResult = result3;
+          },
+          error => {
+            // console.log('Une erreur est survenu lors de l\'upload de l\'image', error);
+          }
+        );
+      },
+      error => {
+        // console.log('Une erreur est survenu lors de l\'upload de l\'image', error);
+      }
+    );
   }
 
   ngOnInit() {

@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="custom-file">
-            <input class="custom-file-input" type="file" name="fileInput" (change)="onFileChange($event)"  />
+            <input class="custom-file-input" type="file" name="fileInput" (change)="onFileChange($event)" capture accept="image/*" />
             <label class="custom-file-label" for="customFile">Choisir l'image</label>
             <img id="blah" [src]="imageSrc || 'assets/aucun_apercu.png'" alt="Image du produit" />
             <br>

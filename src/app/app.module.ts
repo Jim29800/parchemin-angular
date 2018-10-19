@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 import { Globals } from './globals'
 
@@ -26,6 +27,7 @@ import { LoginComponent } from './auth/login/login.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    Ng2ImgMaxModule,
   ],
   providers: [Globals],
   bootstrap: [AppComponent]
