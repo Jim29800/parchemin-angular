@@ -144,7 +144,7 @@ export class ProductEditComponent implements OnInit {
         this.description = data['description'];
         this.city = data['city']['id'];
         this.category = data['category']['id'];
-        if (data['image'] {
+        if (data['image']) {
           this.urlImage = this.Globals.urlImage + data['image'];
         }
         this.formSent = false;  
