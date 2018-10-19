@@ -1,3 +1,103 @@
-<p>
-  product-edit works!
-</p>
+<div *ngIf="formSent == true; else formSent" class="text-center">
+  <h2>Requête envoyée, veuillez patienter</h2>
+</div>
+<ng-template #formSent>
+
+  <div *ngIf="product; else productNotLoaded" class="text-center">
+      <h2>Edition d'une annonce</h2>
+      <form class="text-center">
+          <div *ngIf="error != ''">
+              <span class="text-danger font-weight-bold">{{ error }}</span>
+          </div>
+          <br />
+          <div class="d-flex justify-content-between">
+              <button type="editProduct()" class="btn btn-primary">
+                  Enregistrer les modifications
+              </button>
+              <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteModal">
+                Supprimer l'annonce
+              </button>
+          </div>
+          <div class="form-group">
+              <label for="title">Titre</label>
+              <input id="title" autofocus type="text" class="form-control" [(ngModel)]="title" name="title" required>
+          </div>
+          <div class="form-group">
+              <label for="ref">Référence</label>
+              <input id="ref" autofocus type="text" class="form-control" [(ngModel)]="ref" name="ref" required>
+          </div>
+          <div class="form-group">
+              <label for="description">Description</label>
+              <input id="description" autofocus type="text" class="form-control" [(ngModel)]="description" name="description" required>
+          </div>
+
+          <div class="form-group">
+              <label for="category">Catégorie</label>
+              <select name="category" id="category" class="custom-select" [(ngModel)]="category">
+                  <option *ngFor="let category of categories" id="{{ category['id'] }}" class="text-capitalize" [ngValue]="category.id">
+                      {{ category["name"] }}
+                  </option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="city">Ville</label>
+              <select name="city" id="city" class="custom-select" [(ngModel)]="city">
+                  <option *ngFor="let city of cities" id="{{ city['id'] }}" class="text-capitalize" [ngValue]="city.id">
+                      {{ city["name"] }}
+                  </option>
+              </select>
+          </div>
+
+
+          <label for="city">Tags associés</label>
+          <div class="form-group">
+              <div *ngFor="let tag of tags" class="form-check form-check-inline">
+                  <input [(ngModel)]="tagSelected[tag['id']]" type="checkbox" id="tag{{ tag['id'] }}" name="tag{{ tag['id'] }}" class="form-check-input" value="{{ tag['id'] }}">
+                  <label class="text-capitalize form-check-label" for="tag{{ tag['id'] }}">{{ tag["name"] }}</label>
+              </div>
+          </div>
+
+          <div class="custom-file">
+              <input class="custom-file-input" type="file" name="fileInput" (change)="onFileChange($event)" capture accept="image/*" />
+              <label class="custom-file-label" for="customFile">Choisir l'image</label>
+              <span *ngIf="urlImage && !imageSrc, else noImage">
+                <img src="{{ urlImage }}" alt="Image du produit">
+              </span>
+              <ng-template #noImage>
+                <img id="blah" [src]="imageSrc || 'assets/aucun_apercu.png'" alt="Image du produit" />
+              </ng-template>
+              <br>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-danger text-light text-center">
+                  <h5 class="modal-title w-100" id="deleteModalLabel">Action de suppression</h5>
+                  <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-center">
+                  <p>
+                    Confirmez-vous la suppression ?
+                  </p>
+                  <p>
+                    Cette action est irréversible !
+                  </p>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                  <button (click)="deleteProduct()" class="btn btn-danger" data-dismiss="modal">
+                    Supprimer l'annonce
+                  </button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Fermer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+  </div>
+  <ng-template #productNotLoaded>
+    <h2>Chargement des informations</h2>
+  </ng-template>
+</ng-template>

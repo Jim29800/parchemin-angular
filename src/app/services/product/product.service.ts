@@ -37,8 +37,37 @@ export class ProductService {
       })
       ;
   }
+  patchProduct(uuid, title, description, ref, category, city, tags, image) {
+    let url: string = this.globals.url + "products/" + uuid;
+    let data = {
+      "title": title,
+      "description": description,
+      "ref": ref,
+      "category": category,
+      "city": city,
+      "tags": tags
+    }
+    if (image != null) {
+      data["img"] = image;
+    }
+    return this.http.patch(url,
+      data,
+      {
+        headers: this.header
+      })
+
+
+  }
   getCreatedProducts() {
     let url: string = this.globals.url + "products/created";
+    return this.http.get(url,
+      {
+        headers: this.header
+      })
+      ;
+  }
+  getProduct(uuid) {
+    let url: string = this.globals.url + "products/" + uuid;
     return this.http.get(url,
       {
         headers: this.header

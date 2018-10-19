@@ -72,7 +72,7 @@ export class ProductNewComponent implements OnInit {
       },
         error => {
           this.formSent = false;
-          console.log(error);
+          // console.log(error);
           this.error = 'Erreur, veuillez vérifier les données saisies.'
         }
       );
