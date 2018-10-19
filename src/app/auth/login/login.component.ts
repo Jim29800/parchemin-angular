@@ -36,7 +36,7 @@ export class LoginComponent {
           this.setMessage();
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
-          location.reload();
+          // location.reload();
           let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/product-list';
           // Redirect the user
           this.router.navigate([redirect]);
