@@ -51,11 +51,10 @@ export class ProductNewComponent implements OnInit {
     this.formSent  = true;
 
     let tags = [];
-    for (let i = 0; i < this.tagSelected.length; i++) {
-      if (this.tagSelected[i] == true) {
-        tags.push(i);
+    for (let index in this.tagSelected) {
+      if (this.tagSelected[index] == true) {
+        tags.push(index)
       }
-      
     }
 
     //Si il y a une image, renvoi l'image sinon renvoie null
