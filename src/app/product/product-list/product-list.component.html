@@ -27,7 +27,7 @@
           {{ product.createdAt }}
         </td>
         <td class="align-middle">
-          <a routerLink="" class="btn btn-danger">Supprimer</a>
+          <a [routerLink]="['/product-edit']" [queryParams]="{product: product.uuid}" class="btn btn-warning">Editer</a>
         </td>
       </tr>
     </tbody>

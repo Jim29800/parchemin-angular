@@ -45,4 +45,13 @@ export class ProductService {
       })
       ;
   }
+  deleteProduct(uuid){
+    let url: string = this.globals.url + "products/" + uuid;
+
+    return this.http.delete(url,
+      {
+        headers: this.header
+      })
+      ;
+  }
 }

@@ -12,6 +12,7 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { AppRoutingModule } from './/app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LoginComponent } from './auth/login/login.component';
     ProductNewComponent,
     ProductListComponent,
     HomepageComponent,
-    LoginComponent
+    LoginComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,
