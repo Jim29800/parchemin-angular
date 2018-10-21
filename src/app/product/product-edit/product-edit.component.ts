@@ -40,7 +40,7 @@ export class ProductEditComponent implements OnInit {
   imageSrc;
 
   // Information si le formulaire est envoyer
-  formSent = false;
+  editFormSent = false;
 
   constructor(public ProductService: ProductService, 
     public CategoryService: CategoryService,
@@ -58,7 +58,7 @@ export class ProductEditComponent implements OnInit {
   }
   editProduct(){
 
-    this.formSent = true;
+    this.editFormSent = true;
 
     let tags = [];
     for (let index in this.tagSelected) {
@@ -81,7 +81,7 @@ export class ProductEditComponent implements OnInit {
       },
         error => {
           // console.log(error);
-          this.formSent = false;
+          this.editFormSent = false;
           this.error = 'Erreur, veuillez vérifier les données saisies.'
         }
       );
@@ -147,7 +147,7 @@ export class ProductEditComponent implements OnInit {
         if (data['image']) {
           this.urlImage = this.Globals.urlImage + data['image'];
         }
-        this.formSent = false;  
+        this.editFormSent = false;  
       }
     );
     this.CategoryService.getCategories().subscribe(
