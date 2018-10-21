@@ -2,13 +2,12 @@
   <table class="table-list table">
     <thead class="thead-dark">
       <th>Image</th>
-      <th class="sort" data-sort="ref" style="cursor: pointer;">Référence ▼</th>
-      <th class="sort" data-sort="title" style="cursor: pointer;">Titre ▼</th>
-      <th class="sort" data-sort="createdAt" style="cursor: pointer;">Date de création ▼</th>
-      <th>Actions</th>
+      <th class="sort" data-sort="ref" style="cursor: pointer;">Réf</th>
+      <th class="sort" data-sort="title" style="cursor: pointer;">Titre</th>
+      <th class="sort" data-sort="createdAt" style="cursor: pointer;">Créer le</th>
     </thead>
     <tbody *ngFor="let product of products">
-      <tr>
+      <tr [routerLink]="['/product-edit']" [queryParams]="{product: product.uuid}">
         <td *ngIf="product.image; else noImageBlock">
           <img style="max-height : 5em; max-width : 5em" src="{{ urlImage + product.image }}" alt="Aperçu du produit">
         </td>
@@ -24,10 +23,7 @@
           {{ product.title }}
         </td>
         <td class="align-middle">
-          {{ product.createdAt }}
-        </td>
-        <td class="align-middle">
-          <a [routerLink]="['/product-edit']" [queryParams]="{product: product.uuid}" class="btn btn-warning">Editer</a>
+          {{ product.createdAt | date:'dd/MM/yyyy' }}
         </td>
       </tr>
     </tbody>
