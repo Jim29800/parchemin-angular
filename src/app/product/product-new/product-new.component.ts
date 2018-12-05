@@ -25,7 +25,6 @@ export class ProductNewComponent implements OnInit {
   city : string;
   tagSelected = [] ;
   title : string;
-  ref : string;
   description : string;
   selectedFile: File;
   fileResult: any;
@@ -66,7 +65,7 @@ export class ProductNewComponent implements OnInit {
     }
 
     // console.log(this.fileResult['__zone_symbol__value'])
-    this.ProductService.post(this.title, this.description, this.ref, this.category, this.city, tags, image)
+    this.ProductService.post(this.title, this.description, this.category, this.city, tags, image)
       .subscribe(event => {
         this.router.navigate(["/product-list"]);
       },

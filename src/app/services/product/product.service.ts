@@ -17,12 +17,11 @@ export class ProductService {
 
   constructor(private globals: Globals, private http: HttpClient) { }
 
-  post(title, description, ref, category, city, tags, image) {
+  post(title, description, category, city, tags, image) {
     let url: string = this.globals.url + "products";
     let data = {
       "title": title,
       "description": description,
-      "ref": ref,
       "category": category,
       "city": city,
       "tags": tags
@@ -37,12 +36,11 @@ export class ProductService {
       })
       ;
   }
-  patchProduct(uuid, title, description, ref, category, city, tags, image) {
+  patchProduct(uuid, title, description, category, city, tags, image) {
     let url: string = this.globals.url + "products/" + uuid;
     let data = {
       "title": title,
       "description": description,
-      "ref": ref,
       "category": category,
       "city": city,
       "tags": tags

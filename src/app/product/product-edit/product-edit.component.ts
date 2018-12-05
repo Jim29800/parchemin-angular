@@ -30,7 +30,6 @@ export class ProductEditComponent implements OnInit {
   city: string;
   tagSelected = [];
   title: string;
-  ref: string;
   description: string;
   urlImage : string;
   selectedFile: File;
@@ -75,7 +74,7 @@ export class ProductEditComponent implements OnInit {
       image = null;
     }
     // console.log(this.fileResult['__zone_symbol__value'])
-    this.ProductService.patchProduct(this.uuid, this.title, this.description, this.ref, this.category, this.city, tags, image)
+    this.ProductService.patchProduct(this.uuid, this.title, this.description, this.category, this.city, tags, image)
       .subscribe(event => {
         this.router.navigate(["/product-list"]);
       },
@@ -140,7 +139,6 @@ export class ProductEditComponent implements OnInit {
           this.tagSelected[data['tags'][index]['id']] = true
         }
         this.title = data['title'];
-        this.ref = data['ref'];
         this.description = data['description'];
         this.city = data['city']['id'];
         this.category = data['category']['id'];
